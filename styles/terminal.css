@@ -2,7 +2,6 @@
     width: 57%;
     height: 26.85%;
     align-self: end;
-    overflow-y: scroll;
 }
 
 .terminal-border {
@@ -22,8 +21,18 @@
     border-width: 0px 0px 1px 0px;
 }
 
+.terminal-container {
+    max-height: 88.11%;
+    overflow-y: auto;
+}
+
+.text-area-container {
+    margin: 0px 0px 0px .5%;
+}   
+
 .input-terminal {
     display: flex;
+    align-items: center;
     width: 99%;
     height: 10%;
     border: none;
@@ -31,16 +40,11 @@
     margin: 0px 0px 0px .5%;
 }
 
-.input-terminal > span {
-    font-size: x-large;
-}
-
 .textarea-terminal {
     width: 100%;
     border: none;
     padding: 0px;
     resize: none;
-    font-size: larger;
     background-color: var(--background-color);
 }
 
