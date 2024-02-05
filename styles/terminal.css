@@ -1,0 +1,49 @@
+.terminal {
+    width: 57%;
+    height: 26.85%;
+    align-self: end;
+    overflow-y: scroll;
+}
+
+.terminal-border {
+    border-width: 1px 1px 0px 0px;
+}
+
+.terminal > h3 {
+    position: sticky;
+    top: 0px;
+    margin: 0px;
+    width: 100%;
+    text-align: center;
+    font-size: x-large;
+    background-color: var(--background-color);
+    border-color: var(--default-color);
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+}
+
+.input-terminal {
+    display: flex;
+    width: 99%;
+    height: 10%;
+    border: none;
+    padding: 0px;
+    margin: 0px 0px 0px .5%;
+}
+
+.input-terminal > span {
+    font-size: x-large;
+}
+
+.textarea-terminal {
+    width: 100%;
+    border: none;
+    padding: 0px;
+    resize: none;
+    font-size: larger;
+    background-color: var(--background-color);
+}
+
+.textarea-terminal:focus {
+    outline: none;
+}

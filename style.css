@@ -1,0 +1,42 @@
+@import "./styles/terminal.css";
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+:root {
+    --default-color: #2AFB97;
+    --background-color: #000A0C;
+}
+
+* {
+    font-family: 'VT323', monospace;
+    color: #2AFB97;
+    
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+    display: none;
+  }
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--background-color);
+    overflow: hidden;
+    padding: 10.5px;
+    box-sizing: border-box;
+}
+
+.global-content-wrapper {
+    display: flex;
+    height: 100%;
+    border: 1px solid var(--default-color);
+}
+
+.default-container {
+    border-color: var(--default-color);
+    border-style: solid;
+    box-sizing: border-box;
+}
