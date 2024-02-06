@@ -22,17 +22,19 @@
 }
 
 .terminal-container {
+    max-width: 100%;
     max-height: 88.11%;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.text-area-container {
+.log-container {
     margin: 0px 0px 0px .5%;
 }   
 
 .input-terminal {
     display: flex;
-    align-items: center;
+    align-items: start;
     width: 99%;
     height: 10%;
     border: none;
@@ -42,8 +44,13 @@
 
 .textarea-terminal {
     width: 100%;
+    max-height: 100px;
+    min-height: 15px;
     border: none;
     padding: 0px;
+    margin: 0px 0px 0px .5%;
+    font-size: medium;
+    overflow: hidden;
     resize: none;
     background-color: var(--background-color);
 }
