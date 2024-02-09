@@ -1,0 +1,14 @@
+.weather-image {
+    grid-area: weather-image;
+    padding: 5px;
+}
+
+.weather-image img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.weather-image-border {
+    border-width: 0px 1px 1px 0px;
+}

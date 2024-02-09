@@ -1,2 +1,2 @@
-import "./service/terminal.js"
+import "./js/terminal.js"
 

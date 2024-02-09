@@ -1,7 +1,5 @@
 .terminal {
-    width: 57%;
-    height: 26.85%;
-    align-self: end;
+    grid-area: terminal;
 }
 
 .terminal-border {

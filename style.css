@@ -1,4 +1,7 @@
 @import "./styles/terminal.css";
+@import "./styles/header.css";
+@import "./styles/weather-image.css";
+@import "./styles/weather-data.css";
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 :root {
@@ -22,8 +25,19 @@ body {
 }
 
 .global-content-wrapper {
-    display: flex;
-    height: 100%;
+    display: grid;
+    grid-template-columns: 13% 40% 26% 21%;
+    grid-template-rows: 20% 7.5% 4% 26% 16% 27%;
+    grid-template-areas:
+    "weather-image solar-data . ."
+    "weather-image . . ."
+    ". . . ."
+    ". . . ."
+    ". . . ."
+    "terminal terminal . ."
+
+    ;
+    height: 96%;
     border: 1px solid var(--default-color);
 }
 

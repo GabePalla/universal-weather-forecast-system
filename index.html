@@ -8,8 +8,30 @@
         <title>GLOBAL WEATHER FORECAST SYSTEM</title>
     </head>
     <body>
+        <Header class="default-container header-container header-borders">
+            <span>GWFS</span>
+            <h1>GLOBAL WEATHER FORECAST SYSTEM</h1>
+            <span>GWFS</span>
+        </Header>
         <section class="global-content-wrapper">
-            <section class="terminal terminal-border default-container">
+
+            <div class="weather-image default-container weather-image-border">
+                <img src="./images/cloudy-day-3.png" alt="">
+            </div>
+
+            <div class="solar-data default-container solar-data-border">
+                <h4>SOLAR DATA:</h4>
+                <ul>
+                    <li>Solar Radiation: </li>
+                    <li>Solar Energy: </li>
+                    <li>UV index: </li>
+                    <li>Severe Risk: </li>
+                    <li>Sunrise hour: </li>
+                    <li>Sunset hour: </li>
+                </ul>
+            </div>
+
+            <div class="terminal terminal-border default-container">
                 <h3>Terminal</h3>
                 <div class="terminal-container">
                     <div class="log-container" data-log-container></div>
@@ -18,7 +40,7 @@
                         <textarea class="textarea-terminal" maxlength="615" data-text-area-terminal></textarea>
                     </div>
                 </div>
-            </section>
+            </div>
         </section>
     </body>
     <script type="module" src="./script.js"></script>

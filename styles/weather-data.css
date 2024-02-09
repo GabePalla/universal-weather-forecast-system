@@ -1,0 +1,7 @@
+.solar-data {
+    grid-area: solar-data;
+}
+
+.solar-data-border {
+    border-width: 0px 1px 1px 0px;
+}
