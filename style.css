@@ -10,35 +10,32 @@
 }
 
 * {
+    box-sizing: border-box;
     font-family: 'VT323', monospace;
     color: #2AFB97;
     scrollbar-color: var(--default-color) var(--background-color);
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 100vw;
     height: 100vh;
+    padding: 10.5px;
     background-color: var(--background-color);
     overflow: hidden;
-    padding: 10.5px;
     box-sizing: border-box;
 }
 
-.global-content-wrapper {
-    display: grid;
-    grid-template-columns: 13% 40% 26% 21%;
-    grid-template-rows: 20% 7.5% 4% 26% 16% 27%;
-    grid-template-areas:
-    "weather-image solar-data . ."
-    "weather-image . . ."
-    ". . . ."
-    ". . . ."
-    ". . . ."
-    "terminal terminal . ."
-
-    ;
-    height: 96%;
+.global-content-container {
+    flex-basis: 100%;
     border: 1px solid var(--default-color);
+}
+
+.input-data-container {
+    max-height: 25%;
+    min-height: 25%;
 }
 
 .default-container {
@@ -46,3 +43,4 @@ body {
     border-style: solid;
     box-sizing: border-box;
 }
+

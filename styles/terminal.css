@@ -1,9 +1,11 @@
 .terminal {
-    grid-area: terminal;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .terminal-border {
-    border-width: 1px 1px 0px 0px;
+    border-width: 0px 1px 1px 1px;
 }
 
 .terminal > h3 {
@@ -20,8 +22,7 @@
 }
 
 .terminal-container {
-    max-width: 100%;
-    max-height: 88.11%;
+    flex-basis: 100%;
     overflow-y: auto;
     overflow-x: hidden;
 }
