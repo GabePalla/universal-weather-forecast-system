@@ -1,0 +1,55 @@
+{
+    "solarData": [
+        {
+            "label": "Solar Radiation:",
+            "key": "solarradiation",
+            "us": "W/m2",
+            "metric": "W/m2",
+            "uk": "W/m2"
+        },
+        {
+            "label": "Solar Energy:",
+            "key": "solarenergy",
+            "us": "MJ/m2",
+            "metric": "MJ/m2",
+            "uk": "MJ/m2"
+        },
+        {
+            "label": "UV index:",
+            "key": "uvindex",
+            "us": "",
+            "metric": "",
+            "uk": ""
+        },
+        {
+            "label": "Severe Risk:",
+            "key": "severerisk",
+            "us": "",
+            "metric": "",
+            "uk": ""
+        },
+        {
+            "label": "Sunrise hour:",
+            "key": "sunrise",
+            "us": "",
+            "metric": "",
+            "uk": ""
+        },
+        {
+            "label": "Sunset hour:",
+            "key": "sunset",
+            "us": "",
+            "metric": "",
+            "uk": ""
+        }
+    ],
+    "moonPhase": [
+        {
+            "label": "Moon Phase:",
+            "key": "moonphase",
+            "us": "",
+            "metric": "",
+            "uk": ""
+        }
+    ]
+}

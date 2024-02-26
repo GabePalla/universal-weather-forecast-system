@@ -25,10 +25,10 @@ body {
     padding: 10.5px;
     background-color: var(--background-color);
     overflow: hidden;
-    box-sizing: border-box;
 }
 
 .global-content-container {
+    display: grid;
     flex-basis: 100%;
     border: 1px solid var(--default-color);
 }
@@ -43,4 +43,3 @@ body {
     border-style: solid;
     box-sizing: border-box;
 }
-

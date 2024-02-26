@@ -1,11 +1,12 @@
 .weather-image {
-
-}
-
-.weather-image img {
     width: 100%;
+    height: 100%;
+    padding: 5px;
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 6;
 }
-
 
 .weather-image-border {
     border-width: 0px 1px 1px 0px;

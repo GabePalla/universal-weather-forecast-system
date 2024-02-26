@@ -1,6 +1,8 @@
 const solarDataBody = document.querySelector('[data-solar-data-body]');
+const moonPhaseDataBody = document.querySelector('[data-moon-phase-data-body]')
 
-const jsonObj = {
+
+const solarDataMook = {
     "solarradiation": null,
     "solarenergy": 0,
     "uvindex": 10,
@@ -11,51 +13,9 @@ const jsonObj = {
     "sunsetEpoch": 1707517073,
 };
 
-const labelAndKeySolarDataValues = [
-    {
-        "label": "Solar Radiation:",
-        "key": "solarradiation",
-        "us": "W/m2",
-        "metric": "W/m2",
-        "uk": "W/m2"
-    },
-    {
-        "label": "Solar Energy:",
-        "key": "solarenergy",
-        "us": "MJ/m2",
-        "metric": "MJ/m2",
-        "uk": "MJ/m2"
-    },
-    {
-        "label": "UV index:",
-        "key": "uvindex",
-        "us": "",
-        "metric": "",
-        "uk": ""
-    },
-    {
-        "label": "Severe Risk:",
-        "key": "severerisk",
-        "us": "",
-        "metric": "",
-        "uk": ""
-    },
-    {
-        "label": "Sunrise hour:",
-        "key": "sunrise",
-        "us": "",
-        "metric": "",
-        "uk": ""
-    },
-    {
-        "label": "Sunset hour:",
-        "key": "sunset",
-        "us": "",
-        "metric": "",
-        "uk": ""
-    },
-]
-
+const moonPhaseDataMook = {
+    "moonphase": 'Waxing crescent',
+};
 
 function dataGenerator(labelAndKeysList, requestResponse, htmlElement, dataUnit) {
     labelAndKeysList.forEach(element => {
@@ -72,4 +32,19 @@ function dataGenerator(labelAndKeysList, requestResponse, htmlElement, dataUnit)
     });
 }
 
-dataGenerator(labelAndKeySolarDataValues, jsonObj, solarDataBody, "metric");
+async function getDataConfiguration() {
+    try {
+        const fetchReponse = await fetch('../conf/weather-data-config.json');
+        return await fetchReponse.json();
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+async function displayDataGenerator() {
+    const resultObject = await getDataConfiguration();
+    dataGenerator(resultObject['solarData'], solarDataMook, solarDataBody, "metric");
+    dataGenerator(resultObject['moonPhase'], moonPhaseDataMook, moonPhaseDataBody, "metric");
+}
+
+displayDataGenerator();

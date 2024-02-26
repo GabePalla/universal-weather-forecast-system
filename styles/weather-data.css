@@ -1,15 +1,15 @@
 .weather-data-container {
     padding: .5% 0px 0px 1.5%;
-    font-size: larger;
+    font-size: 1.9vh;
 }
 
 .weather-data-container-border {
     border-width: 0px 1px 1px 0px;
 }
 
-.weather-data-container h4 {
+.weather-data-container label {
     margin: 0px;
-    font-size: x-large;
+    font-size: large;
 }
 
 .weather-data-container ul {
@@ -22,9 +22,23 @@
 .weather-data-container ul div {
     display: flex;
     justify-content: space-between;
-    padding-right: 30%;
+    padding-right: 25%;
 }
 
 .weather-data-container li {
     list-style-type: none;
+}
+
+.solar-data {
+    grid-column-start: 6;
+    grid-column-end: 21;
+    grid-row-start: 1;
+    grid-row-end: 5;
+}
+
+.moon-phase {
+    grid-column-start: 6;
+    grid-column-end: 21;
+    grid-row-start: 5;
+    grid-row-end: 6;
 }
