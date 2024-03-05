@@ -1,5 +1,5 @@
 .weather-data-container {
-    padding: .5% 0px 0px 1.5%;
+    padding: .5% 0px 1% 1.5%;
     font-size: 1.9vh;
 }
 
@@ -22,11 +22,12 @@
 .weather-data-container ul div {
     display: flex;
     justify-content: space-between;
-    padding-right: 25%;
 }
 
 .weather-data-container li {
     list-style-type: none;
+    width: 70%;
+    text-align: left;
 }
 
 .solar-data {
@@ -41,4 +42,11 @@
     grid-column-end: 21;
     grid-row-start: 5;
     grid-row-end: 6;
+}
+
+.general-data {
+    grid-column-start: 1;
+    grid-column-end: 21;
+    grid-row-start: 6;
+    grid-row-end: 11;
 }
