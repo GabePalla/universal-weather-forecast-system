@@ -95,5 +95,77 @@
             "metric": "cm",
             "uk": "cm"
         }
+    ],
+    "environmentalData" : [
+        {
+            "label": "Max Temperature:",
+            "key": "tempmax",
+            "us": "°F",
+            "metric": "°C",
+            "uk": "°C"
+        },
+        {
+            "label": "Min Temperature:",
+            "key": "tempmin",
+            "us": "°F",
+            "metric": "°C",
+            "uk": "°C"
+        },
+        {
+            "label": "Feels Like Max:",
+            "key": "feelslikemax",
+            "us": "°F",
+            "metric": "°C",
+            "uk": "°C"
+        },
+        {
+            "label": "Feels Like Min:",
+            "key": "feelslikemin",
+            "us": "°F",
+            "metric": "°C",
+            "uk": "°C"
+        },
+        {
+            "label": "Feels Like:",
+            "key": "feelslike",
+            "us": "°F",
+            "metric": "°C",
+            "uk": "°C"
+        },
+        {
+            "label": "Dew Point:",
+            "key": "dew",
+            "us": "°F",
+            "metric": "°C",
+            "uk": "°C"
+        },
+        {
+            "label": "Humidity:",
+            "key": "humidity",
+            "us": "%",
+            "metric": "%",
+            "uk": "%"
+        },
+        {
+            "label": "Pressure:",
+            "key": "pressure",
+            "us": "mb",
+            "metric": "mb",
+            "uk": "mb"
+        },
+        {
+            "label": "Cloud Cover:",
+            "key": "cloudcover",
+            "us": "%",
+            "metric": "%",
+            "uk": "%"
+        },
+        {
+            "label": "Visibility:",
+            "key": "visibility",
+            "us": "miles",
+            "metric": "km",
+            "uk": "km"
+        }
     ]
 }

@@ -72,3 +72,10 @@
     grid-row-start: 12;
     grid-row-end: 16;
 }
+
+.environmental-data {
+    grid-column-start: 22;
+    grid-column-end: 35;
+    grid-row-start: 1;
+    grid-row-end: 7;
+}
