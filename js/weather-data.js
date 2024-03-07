@@ -2,6 +2,7 @@ const solarDataBody = document.querySelector('[data-solar-data-body]');
 const moonPhaseDataBody = document.querySelector('[data-moon-phase-data-body]')
 const generalDataBody = document.querySelector('[data-general-data-body]')
 const windDataBody = document.querySelector('[data-wind-data-body]')
+const rainSnowDataBody = document.querySelector('[data-rain-snow-data-body]')
 
 
 const solarDataMook = {
@@ -19,7 +20,7 @@ const moonPhaseDataMook = {
     "moonphase": 'Waxing crescent',
 };
 
-const GeneralDataMook = {
+const generalDataMook = {
     "temp": "30",
     "conditions": "Rainy, Partially cloudy.",
     "description": "Similar temperatures continuing with a chance of rain tomorrow.Similar temperatures continuing with a chance of rain tomorrow.",
@@ -31,10 +32,19 @@ const GeneralDataMook = {
     "datetimeEpoch": 1709608620,
 };
 
-const WindDataMook = {
+const windDataMook = {
     "windgust": 42.1,
     "windspeed": 18.4,
     "winddir": 200,
+};
+
+const rainSnowDataMook = {
+    "precip": 0,
+    "precipprob": 16.1,
+    "precipcover": 0,
+    "preciptype": "rain, snow",
+    "snow": 0,
+    "snowdepth": 0,
 };
 
 function dataGenerator(labelAndKeysList, requestResponse, htmlElement, dataUnit) {
@@ -128,35 +138,35 @@ async function getDataConfiguration() {
 
 function windDirectionDesc(dir) {
 
-    if(dir >= 340 && dir <= 360 || dir >= 0 && dir <= 20) {
+    if (dir >= 340 && dir <= 360 || dir >= 0 && dir <= 20) {
         return "North";
     }
 
-    if(dir > 20 && dir < 70) {
+    if (dir > 20 && dir < 70) {
         return "North/East";
     }
 
-    if(dir >= 70 && dir <= 110) {
+    if (dir >= 70 && dir <= 110) {
         return "East";
     }
 
-    if(dir > 110 && dir < 160) {
+    if (dir > 110 && dir < 160) {
         return "South/East";
     }
 
-    if(dir >= 160 && dir <= 200) {
+    if (dir >= 160 && dir <= 200) {
         return "South";
     }
 
-    if(dir > 200 && dir < 250) {
+    if (dir > 200 && dir < 250) {
         return "South/West";
     }
 
-    if(dir >= 250 && dir <= 290) {
+    if (dir >= 250 && dir <= 290) {
         return "West";
     }
 
-    if(dir > 290 && dir < 340) {
+    if (dir > 290 && dir < 340) {
         return "North/West";
     }
 }
@@ -165,8 +175,9 @@ async function displayDataGenerator() {
     const resultObject = await getDataConfiguration();
     dataGenerator(resultObject['solarData'], solarDataMook, solarDataBody, "metric");
     dataGenerator(resultObject['moonPhase'], moonPhaseDataMook, moonPhaseDataBody, "metric");
-    generalDataGenerator(GeneralDataMook, generalDataBody, "metric", true, "pt-br");
-    windDataGenerator(WindDataMook, windDataBody, "metric");
+    dataGenerator(resultObject['rainSnowData'], rainSnowDataMook, rainSnowDataBody, "metric");
+    generalDataGenerator(generalDataMook, generalDataBody, "metric", true, "pt-br");
+    windDataGenerator(windDataMook, windDataBody, "metric");
 }
 
 displayDataGenerator();

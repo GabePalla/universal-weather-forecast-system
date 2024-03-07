@@ -51,5 +51,49 @@
             "metric": "",
             "uk": ""
         }
+    ],
+    "rainSnowData" : [
+        {
+            "label": "Precipitation:",
+            "key": "precip",
+            "us": "inches",
+            "metric": "mm",
+            "uk": "mm"
+        },
+        {
+            "label": "Precipitation Probability:",
+            "key": "precipprob",
+            "us": "%",
+            "metric": "%",
+            "uk": "%"
+        },
+        {
+            "label": "Precipitation Cover:",
+            "key": "precipcover",
+            "us": "%",
+            "metric": "%",
+            "uk": "%"
+        },
+        {
+            "label": "Precipitation type:",
+            "key": "preciptype",
+            "us": "",
+            "metric": "",
+            "uk": ""
+        },
+        {
+            "label": "Snow:",
+            "key": "snow",
+            "us": "inches",
+            "metric": "cm",
+            "uk": "cm"
+        },
+        {
+            "label": "Snow Depth:",
+            "key": "snowdepth",
+            "us": "inches",
+            "metric": "cm",
+            "uk": "cm"
+        }
     ]
 }

@@ -1,5 +1,5 @@
 .weather-data-container {
-    padding: .5% 0px 1% 1.5%;
+    padding: .1vw 0px .5vw 1vw;
     font-size: 1.9vh;
 }
 
@@ -8,6 +8,10 @@
 }
 
 .wind-data-container-border {
+    border-width: 0px 1px 0px 0px;
+}
+
+.rain-snow-data-container-border {
     border-width: 0px 1px 0px 0px;
 }
 
@@ -30,7 +34,7 @@
 
 .weather-data-container li {
     list-style-type: none;
-    width: 70%;
+    width: 50%;
     text-align: left;
 }
 
@@ -52,12 +56,19 @@
     grid-column-start: 1;
     grid-column-end: 22;
     grid-row-start: 6;
-    grid-row-end: 11;
+    grid-row-end: 12;
 }
 
 .wind-data {
     grid-column-start: 1;
-    grid-column-end: 12;
-    grid-row-start: 11;
+    grid-column-end: 9;
+    grid-row-start: 12;
+    grid-row-end: 16;
+}
+
+.rain-snow-data {
+    grid-column-start: 9;
+    grid-column-end: 22;
+    grid-row-start: 12;
     grid-row-end: 16;
 }
