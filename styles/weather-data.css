@@ -7,6 +7,10 @@
     border-width: 0px 1px 1px 0px;
 }
 
+.wind-data-container-border {
+    border-width: 0px 1px 0px 0px;
+}
+
 .weather-data-container label {
     margin: 0px;
     font-size: large;
@@ -32,21 +36,28 @@
 
 .solar-data {
     grid-column-start: 6;
-    grid-column-end: 21;
+    grid-column-end: 22;
     grid-row-start: 1;
     grid-row-end: 5;
 }
 
 .moon-phase {
     grid-column-start: 6;
-    grid-column-end: 21;
+    grid-column-end: 22;
     grid-row-start: 5;
     grid-row-end: 6;
 }
 
 .general-data {
     grid-column-start: 1;
-    grid-column-end: 21;
+    grid-column-end: 22;
     grid-row-start: 6;
     grid-row-end: 11;
+}
+
+.wind-data {
+    grid-column-start: 1;
+    grid-column-end: 12;
+    grid-row-start: 11;
+    grid-row-end: 16;
 }

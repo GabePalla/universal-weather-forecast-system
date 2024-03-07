@@ -1,6 +1,7 @@
 const solarDataBody = document.querySelector('[data-solar-data-body]');
 const moonPhaseDataBody = document.querySelector('[data-moon-phase-data-body]')
 const generalDataBody = document.querySelector('[data-general-data-body]')
+const windDataBody = document.querySelector('[data-wind-data-body]')
 
 
 const solarDataMook = {
@@ -30,6 +31,12 @@ const GeneralDataMook = {
     "datetimeEpoch": 1709608620,
 };
 
+const WindDataMook = {
+    "windgust": 42.1,
+    "windspeed": 18.4,
+    "winddir": 200,
+};
+
 function dataGenerator(labelAndKeysList, requestResponse, htmlElement, dataUnit) {
     labelAndKeysList.forEach(element => {
         let dataElement = `
@@ -49,7 +56,7 @@ function generalDataGenerator(requestResponse, htmlElement, dataUnit, isCurrentC
 
     const regexExp = new RegExp("[0-9]{2}:[0-9]{2}:[0-9]{2} [A-Za-z]+");
     const date = new Date(requestResponse['datetimeEpoch'] * 1000);
-    
+
     let dataElement = `
         <div>
             <label>Temperature:</label>
@@ -70,7 +77,7 @@ function generalDataGenerator(requestResponse, htmlElement, dataUnit, isCurrentC
         ${isCurrentConditions ? `
             <div>
                 <label>Hour:</label>
-                <li>${date.toLocaleTimeString(locale, {timeZone: requestResponse['timezone']})}</li>
+                <li>${date.toLocaleTimeString(locale, { timeZone: requestResponse['timezone'] })}</li>
             </div>
             ` : ''
         }
@@ -91,6 +98,25 @@ function generalDataGenerator(requestResponse, htmlElement, dataUnit, isCurrentC
     htmlElement.innerHTML = htmlElement.innerHTML.concat(dataElement);
 }
 
+function windDataGenerator(requestResponse, htmlElement, dataUnit) {
+    let dataElement = `
+        <div>
+            <label>Wind speed:</label>
+            <li>${requestResponse['windspeed']} ${dataUnit === 'us' ? 'mph' : 'kph'}</li>
+        </div>
+        <div>
+            <label>Wind direction:</label>
+            <li>${requestResponse['winddir']}° ${windDirectionDesc(requestResponse['winddir'])}</li>
+        </div>
+        <div>
+            <label>Wind gust:</label>
+            <li>${requestResponse['windgust']} ${dataUnit === 'us' ? 'mph' : 'kph'}</li>
+        </div>
+    `;
+
+    htmlElement.innerHTML = htmlElement.innerHTML.concat(dataElement);
+}
+
 async function getDataConfiguration() {
     try {
         const fetchReponse = await fetch('../conf/weather-data-config.json');
@@ -100,11 +126,47 @@ async function getDataConfiguration() {
     }
 }
 
+function windDirectionDesc(dir) {
+
+    if(dir >= 340 && dir <= 360 || dir >= 0 && dir <= 20) {
+        return "North";
+    }
+
+    if(dir > 20 && dir < 70) {
+        return "North/East";
+    }
+
+    if(dir >= 70 && dir <= 110) {
+        return "East";
+    }
+
+    if(dir > 110 && dir < 160) {
+        return "South/East";
+    }
+
+    if(dir >= 160 && dir <= 200) {
+        return "South";
+    }
+
+    if(dir > 200 && dir < 250) {
+        return "South/West";
+    }
+
+    if(dir >= 250 && dir <= 290) {
+        return "West";
+    }
+
+    if(dir > 290 && dir < 340) {
+        return "North/West";
+    }
+}
+
 async function displayDataGenerator() {
     const resultObject = await getDataConfiguration();
     dataGenerator(resultObject['solarData'], solarDataMook, solarDataBody, "metric");
     dataGenerator(resultObject['moonPhase'], moonPhaseDataMook, moonPhaseDataBody, "metric");
     generalDataGenerator(GeneralDataMook, generalDataBody, "metric", true, "pt-br");
+    windDataGenerator(WindDataMook, windDataBody, "metric");
 }
 
 displayDataGenerator();
