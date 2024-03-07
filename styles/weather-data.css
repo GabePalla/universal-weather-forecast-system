@@ -15,6 +15,10 @@
     border-width: 0px 1px 0px 0px;
 }
 
+.source-data-container-border {
+    border-width: 0px 0px 1px 0px;
+}
+
 .weather-data-container label {
     margin: 0px;
     font-size: large;
@@ -40,21 +44,21 @@
 
 .solar-data {
     grid-column-start: 6;
-    grid-column-end: 22;
+    grid-column-end: 26;
     grid-row-start: 1;
     grid-row-end: 5;
 }
 
 .moon-phase {
     grid-column-start: 6;
-    grid-column-end: 22;
+    grid-column-end: 26;
     grid-row-start: 5;
     grid-row-end: 6;
 }
 
 .general-data {
     grid-column-start: 1;
-    grid-column-end: 22;
+    grid-column-end: 26;
     grid-row-start: 6;
     grid-row-end: 12;
 }
@@ -68,14 +72,21 @@
 
 .rain-snow-data {
     grid-column-start: 9;
-    grid-column-end: 22;
+    grid-column-end: 26;
     grid-row-start: 12;
     grid-row-end: 16;
 }
 
 .environmental-data {
-    grid-column-start: 22;
-    grid-column-end: 35;
+    grid-column-start: 26;
+    grid-column-end: 38;
     grid-row-start: 1;
     grid-row-end: 7;
+}
+
+.source-data {
+    grid-column-start: 38;
+    grid-column-end: 46;
+    grid-row-start: 1;
+    grid-row-end: 7; 
 }

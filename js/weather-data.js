@@ -4,6 +4,7 @@ const generalDataBody = document.querySelector('[data-general-data-body]');
 const windDataBody = document.querySelector('[data-wind-data-body]');
 const rainSnowDataBody = document.querySelector('[data-rain-snow-data-body]');
 const environmentalDataBody = document.querySelector('[data-environmental-data-body]');
+const sourceDataBody = document.querySelector('[data-source-data-body]');
 
 
 const solarDataMook = {
@@ -60,6 +61,15 @@ const environmentalDataMook = {
     "cloudcover": 0.2,
     "visibility": 20.6,
 };
+
+const sourceDataMook = {
+    "stations": [
+        "SBCX",
+        "E7075",
+        "remote"
+    ],
+    "source": "comb",
+}
 
 function dataGenerator(labelAndKeysList, requestResponse, htmlElement, dataUnit) {
     labelAndKeysList.forEach(element => {
@@ -191,6 +201,7 @@ async function displayDataGenerator() {
     dataGenerator(resultObject['moonPhase'], moonPhaseDataMook, moonPhaseDataBody, "metric");
     dataGenerator(resultObject['rainSnowData'], rainSnowDataMook, rainSnowDataBody, "metric");
     dataGenerator(resultObject['environmentalData'], environmentalDataMook, environmentalDataBody, "metric");
+    dataGenerator(resultObject['sourceDara'], sourceDataMook, sourceDataBody, "metric");
     generalDataGenerator(generalDataMook, generalDataBody, "metric", true, "pt-br");
     windDataGenerator(windDataMook, windDataBody, "metric");
 }

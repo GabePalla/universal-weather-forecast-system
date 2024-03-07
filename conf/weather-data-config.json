@@ -52,7 +52,7 @@
             "uk": ""
         }
     ],
-    "rainSnowData" : [
+    "rainSnowData": [
         {
             "label": "Precipitation:",
             "key": "precip",
@@ -96,7 +96,7 @@
             "uk": "cm"
         }
     ],
-    "environmentalData" : [
+    "environmentalData": [
         {
             "label": "Max Temperature:",
             "key": "tempmax",
@@ -166,6 +166,22 @@
             "us": "miles",
             "metric": "km",
             "uk": "km"
+        }
+    ],
+    "sourceDara": [
+        {
+            "label": "Stations:",
+            "key": "stations",
+            "us": "",
+            "metric": "",
+            "uk": ""
+        },
+        {
+            "label": "Source:",
+            "key": "source",
+            "us": "",
+            "metric": "",
+            "uk": ""
         }
     ]
 }
