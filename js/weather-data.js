@@ -5,6 +5,7 @@ const windDataBody = document.querySelector('[data-wind-data-body]');
 const rainSnowDataBody = document.querySelector('[data-rain-snow-data-body]');
 const environmentalDataBody = document.querySelector('[data-environmental-data-body]');
 const sourceDataBody = document.querySelector('[data-source-data-body]');
+const stationsDataBody = document.querySelector('[data-stations-data-body]');
 
 
 const solarDataMook = {
@@ -69,6 +70,49 @@ const sourceDataMook = {
         "remote"
     ],
     "source": "comb",
+}
+
+const stationsMockData = {
+    "D7889": {
+        "distance": 66512.0,
+        "latitude": -29.235,
+        "longitude": -51.334,
+        "useCount": 0,
+        "id": "D7889",
+        "name": "DW7889 Farroupilha BR",
+        "quality": 0,
+        "contribution": 0.0
+    },
+    "E7075": {
+        "distance": 73984.0,
+        "latitude": -29.392,
+        "longitude": -51.801,
+        "useCount": 0,
+        "id": "E7075",
+        "name": "EW7075 Teutania BR",
+        "quality": 0,
+        "contribution": 0.0
+    },
+    "F8662": {
+        "distance": 50745.0,
+        "latitude": -29.158,
+        "longitude": -51.516,
+        "useCount": 0,
+        "id": "F8662",
+        "name": "FW8662 Bento Goncalves BR",
+        "quality": 0,
+        "contribution": 0.0
+    },
+    "SBCX": {
+        "distance": 71270.0,
+        "latitude": -29.18,
+        "longitude": -51.18,
+        "useCount": 0,
+        "id": "SBCX",
+        "name": "SBCX",
+        "quality": 14,
+        "contribution": 0.0
+    }
 }
 
 function dataGenerator(labelAndKeysList, requestResponse, htmlElement, dataUnit) {
@@ -151,6 +195,21 @@ function windDataGenerator(requestResponse, htmlElement, dataUnit) {
     htmlElement.innerHTML = htmlElement.innerHTML.concat(dataElement);
 }
 
+function stationsDataGenerator(requestResponse, htmlElement) {
+    Object.entries(requestResponse).forEach(([key, value]) => {
+        let dataElement = `
+        <tr>
+            <td>${value.name}</td>
+            <td>${value.id}</td>
+            <td>${value.distance / 1000}km</td>
+            <td>${value.latitude}</td>
+            <td>${value.longitude}</td>
+        </tr>
+    `;
+        htmlElement.innerHTML = htmlElement.innerHTML.concat(dataElement);
+    })
+}
+
 async function getDataConfiguration() {
     try {
         const fetchReponse = await fetch('../conf/weather-data-config.json');
@@ -202,6 +261,7 @@ async function displayDataGenerator() {
     dataGenerator(resultObject['rainSnowData'], rainSnowDataMook, rainSnowDataBody, "metric");
     dataGenerator(resultObject['environmentalData'], environmentalDataMook, environmentalDataBody, "metric");
     dataGenerator(resultObject['sourceDara'], sourceDataMook, sourceDataBody, "metric");
+    stationsDataGenerator(stationsMockData, stationsDataBody)
     generalDataGenerator(generalDataMook, generalDataBody, "metric", true, "pt-br");
     windDataGenerator(windDataMook, windDataBody, "metric");
 }

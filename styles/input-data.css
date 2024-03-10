@@ -1,14 +1,21 @@
+.input-data-container {
+    display: flex;
+    max-height: 25%;
+    min-height: 25%;
+}
+
 .terminal {
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 60%;
 }
 
 .terminal-border {
     border-width: 0px 1px 1px 1px;
 }
 
-.terminal > h3 {
+.title label {
     position: sticky;
     top: 0px;
     margin: 0px;
@@ -56,4 +63,26 @@
 
 .textarea-terminal:focus {
     outline: none;
+}
+
+.stations-data {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 40%;
+}
+
+.stations-border {
+    border-width: 0px 1px 1px 0px;
+}
+
+.stations-data table {
+    padding-left: .7vw;
+}
+
+.stations-data table thead {
+    text-align: left;
+}
+
+.stations-data table hr {
+    width: 100%;
 }

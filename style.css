@@ -1,4 +1,4 @@
-@import "./styles/terminal.css";
+@import "./styles/input-data.css";
 @import "./styles/header.css";
 @import "./styles/weather-image.css";
 @import "./styles/weather-data.css";
@@ -28,14 +28,9 @@ body {
 }
 
 .global-content-container {
-    display: grid;
+    display: flex;
     flex-basis: 100%;
     border: 1px solid var(--default-color);
-}
-
-.input-data-container {
-    max-height: 25%;
-    min-height: 25%;
 }
 
 .default-container {

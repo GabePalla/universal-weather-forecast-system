@@ -17,65 +17,88 @@
         <section class="global-content-container" id="teste"
             data-global-content-container>
 
-            <img src="./images/rainy-day-at-night-2.png" alt
-                class="weather-image default-container weather-image-border">
+            <div class="left-side-data-container">
+                <div class="image-solar-moon-data-container">
+                    <img src="./images/rainy-day-at-night-2.png"
+                        class="weather-image default-container weather-image-border">
 
-            <div
-                class="solar-data weather-data-container weather-data-container-border default-container">
-                <label>SOLAR DATA:</label>
-                <ul data-solar-data-body></ul>
-            </div>
-            <div
-                class="moon-phase weather-data-container weather-data-container-border default-container">
-                <label>MOON PHASE:</label>
-                <ul data-moon-phase-data-body></ul>
-            </div>
+                    <div class="solar-moon-data-container">
+                        <div
+                            class="solar-data weather-data-container weather-data-container-border default-container">
+                            <label>SOLAR DATA:</label>
+                            <ul data-solar-data-body></ul>
+                        </div>
+                        <div
+                            class="moon-phase weather-data-container weather-data-container-border default-container">
+                            <label>MOON PHASE:</label>
+                            <ul data-moon-phase-data-body></ul>
+                        </div>
+                    </div>
+                </div>
 
-            <div
-                class="general-data weather-data-container weather-data-container-border default-container">
-                <label>GENERAL DATA:</label>
-                <ul data-general-data-body></ul>
-            </div>
+                <div
+                    class="general-data weather-data-container weather-data-container-border default-container">
+                    <label>GENERAL DATA:</label>
+                    <ul data-general-data-body></ul>
+                </div>
 
-            <div
-                class="wind-data weather-data-container wind-data-container-border default-container">
-                <label>WIND DATA:</label>
-                <ul data-wind-data-body></ul>
-            </div>
+                <div class="wind-rain-snow-data-container">
+                    <div
+                        class="wind-data weather-data-container wind-data-container-border default-container">
+                        <label>WIND DATA:</label>
+                        <ul data-wind-data-body></ul>
+                    </div>
 
-            <div
-                class="rain-snow-data weather-data-container rain-snow-data-container-border default-container">
-                <label>RAIN/SNOW DATA:</label>
-                <ul data-rain-snow-data-body></ul>
-            </div>
-
-            <div
-                class="environmental-data weather-data-container weather-data-container-border default-container">
-                <label>ENVIRONMENTAL DATA:</label>
-                <ul data-environmental-data-body></ul>
-            </div>
-
-            <div
-                class="source-data weather-data-container source-data-container-border default-container">
-                <label>SOURCE DATA:</label>
-                <ul data-source-data-body></ul>
-            </div>
-
-        </section>
-
-        <section class="input-data-container">
-            <div class="terminal terminal-border default-container">
-                <h3>Terminal</h3>
-                <div class="terminal-container">
-                    <div class="log-container" data-log-container></div>
-                    <div id="input-terminal" class="input-terminal">
-                        <span>USER-0858> </span>
-                        <textarea class="textarea-terminal" maxlength="615"
-                            data-text-area-terminal></textarea>
+                    <div
+                        class="rain-snow-data weather-data-container rain-snow-data-container-border default-container">
+                        <label>RAIN/SNOW DATA:</label>
+                        <ul data-rain-snow-data-body></ul>
                     </div>
                 </div>
             </div>
-        </section>
-    </body>
-    <script type="module" src="./script.js"></script>
-</html>
+
+            <div class="right-side-data-container">
+                <div
+                    class="environmental-data weather-data-container weather-data-container-border default-container">
+                    <label>ENVIRONMENTAL DATA:</label>
+                    <ul data-environmental-data-body></ul>
+                </div>
+
+                <div
+                    class="source-data weather-data-container source-data-container-border default-container">
+                    <label>SOURCE DATA:</label>
+                    <ul data-source-data-body></ul>
+                </div>
+            </div>
+
+            </section>
+
+            <section class="input-data-container">
+                <div class="terminal title terminal-border default-container">
+                    <label>Terminal</label>
+                    <div class="terminal-container">
+                        <div class="log-container" data-log-container></div>
+                        <div id="input-terminal" class="input-terminal">
+                            <span>USER-0858> </span>
+                            <textarea class="textarea-terminal" maxlength="615"
+                                data-text-area-terminal></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="stations-data title stations-border default-container">
+                <label>STATIONS DATA:</label>
+                <table>
+                    <thead>
+                        <th>Station:</th>
+                        <th>Id:</th>
+                        <th>Distance:</th>
+                        <th>Latitude:</th>
+                        <th>Longitude:</th>
+                    </thead>
+                    <tbody data-stations-data-body></tbody>
+                </table>
+            </div>
+            </section>
+        </body>
+        <script type="module" src="./script.js"></script>
+    </html>

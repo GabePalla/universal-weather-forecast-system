@@ -8,4 +8,4 @@ function gridGenerator() {
     globalContentContainer.style.gridTemplateRows = `repeat(auto-fill, minmax(${gridWidth}px, 1fr))`
 }
 
-gridGenerator();
+// gridGenerator();
