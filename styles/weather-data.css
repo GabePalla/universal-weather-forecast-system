@@ -4,6 +4,13 @@
     flex-direction: column;
 }
 
+.right-side-data-container {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+}
+
 .image-solar-moon-data-container {
     display: flex;
 }
@@ -19,10 +26,8 @@
     width: 100%;
 }
 
-.right-side-data-container {
-    display: flex;
-    width: 40%;
-    height: 40%;
+.graph-data {
+    height: 100%;
 }
 
 .weather-data-container {
@@ -37,6 +42,10 @@
 
 .wind-data-container-border {
     border-width: 0px 1px 0px 0px;
+}
+
+.env-and-source-data-container {
+    display: flex;
 }
 
 .rain-snow-data-container-border {

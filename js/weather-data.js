@@ -7,121 +7,13 @@ const environmentalDataBody = document.querySelector('[data-environmental-data-b
 const sourceDataBody = document.querySelector('[data-source-data-body]');
 const stationsDataBody = document.querySelector('[data-stations-data-body]');
 
-
-const solarDataMook = {
-    "solarradiation": null,
-    "solarenergy": 0,
-    "uvindex": 10,
-    "severerisk": 30,
-    "sunrise": "06:03:48",
-    "sunriseEpoch": 1707469428,
-    "sunset": "19:17:53",
-    "sunsetEpoch": 1707517073,
-};
-
-const moonPhaseDataMook = {
-    "moonphase": 'Waxing crescent',
-};
-
-const generalDataMook = {
-    "temp": "30",
-    "conditions": "Rainy, Partially cloudy.",
-    "description": "Similar temperatures continuing with a chance of rain tomorrow.Similar temperatures continuing with a chance of rain tomorrow.",
-    "datetime": "04-02-2077",
-    "latitude": "-28.7327",
-    "longitude": "-51.7035",
-    "name": "London, England, United Kingdom",
-    "timezone": "Europe/London",
-    "datetimeEpoch": 1709608620,
-};
-
-const windDataMook = {
-    "windgust": 42.1,
-    "windspeed": 18.4,
-    "winddir": 200,
-};
-
-const rainSnowDataMook = {
-    "precip": 0,
-    "precipprob": 16.1,
-    "precipcover": 0,
-    "preciptype": "rain, snow",
-    "snow": 0,
-    "snowdepth": 0,
-};
-
-const environmentalDataMook = {
-    "tempmax": 27.9,
-    "tempmin": 10.9,
-    "feelslikemax": 27.2,
-    "feelslikemin": 10.9,
-    "feelslike": 17.3,
-    "dew": 11.6,
-    "humidity": 73.4,
-    "pressure": 1016.8,
-    "cloudcover": 0.2,
-    "visibility": 20.6,
-};
-
-const sourceDataMook = {
-    "stations": [
-        "SBCX",
-        "E7075",
-        "remote"
-    ],
-    "source": "comb",
-}
-
-const stationsMockData = {
-    "D7889": {
-        "distance": 66512.0,
-        "latitude": -29.235,
-        "longitude": -51.334,
-        "useCount": 0,
-        "id": "D7889",
-        "name": "DW7889 Farroupilha BR",
-        "quality": 0,
-        "contribution": 0.0
-    },
-    "E7075": {
-        "distance": 73984.0,
-        "latitude": -29.392,
-        "longitude": -51.801,
-        "useCount": 0,
-        "id": "E7075",
-        "name": "EW7075 Teutania BR",
-        "quality": 0,
-        "contribution": 0.0
-    },
-    "F8662": {
-        "distance": 50745.0,
-        "latitude": -29.158,
-        "longitude": -51.516,
-        "useCount": 0,
-        "id": "F8662",
-        "name": "FW8662 Bento Goncalves BR",
-        "quality": 0,
-        "contribution": 0.0
-    },
-    "SBCX": {
-        "distance": 71270.0,
-        "latitude": -29.18,
-        "longitude": -51.18,
-        "useCount": 0,
-        "id": "SBCX",
-        "name": "SBCX",
-        "quality": 14,
-        "contribution": 0.0
-    }
-}
-
 function dataGenerator(labelAndKeysList, requestResponse, htmlElement, dataUnit) {
     labelAndKeysList.forEach(element => {
         let dataElement = `
         <div>
             <label>${element.label}</label>
-            <li>${requestResponse[element.key] === null || requestResponse[element.key] === 0 ? "-" : requestResponse[element.key]
-            } ${requestResponse[element.key] === null || requestResponse[element.key] === 0 ? "" : element[dataUnit]
+            <li>${apiResponseFieldValidation(requestResponse[element.key]) ? "-" : requestResponse[element.key]
+            } ${apiResponseFieldValidation(requestResponse[element.key]) ? "" : element[dataUnit]
             }</li>
         </div> \n
         `;
@@ -130,46 +22,44 @@ function dataGenerator(labelAndKeysList, requestResponse, htmlElement, dataUnit)
     });
 }
 
-function generalDataGenerator(requestResponse, htmlElement, dataUnit, isCurrentConditions, locale) {
+function generalDataGenerator(requestResponse, fullObject, htmlElement, dataUnit, locale, isCurrentConditions) {
 
     const regexExp = new RegExp("[0-9]{2}:[0-9]{2}:[0-9]{2} [A-Za-z]+");
     const date = new Date(requestResponse['datetimeEpoch'] * 1000);
+    const description = descriptionFieldpreProcessingData(isCurrentConditions, requestResponse, fullObject);
 
     let dataElement = `
         <div>
             <label>Temperature:</label>
-            <li>${requestResponse['temp']} ${dataUnit === 'us' ? '°F' : '°C'}</li>
+            <li>${apiResponseFieldValidation(requestResponse['temp']) ? '-' : requestResponse['temp']} ${dataUnit === 'us' ? '°F' : '°C'}</li>
         </div>
         <div>
             <label>Conditions:</label>
-            <li>${requestResponse['conditions']}</li>
+            <li>${apiResponseFieldValidation(requestResponse['conditions']) ? '-' : requestResponse['conditions']}</li>
         </div>
         <div>
             <label>Description:</label>
-            <li>${requestResponse['description']}</li>
+            <li>${apiResponseFieldValidation(description) ? '-' : description}</li>
         </div>
         <div>
             <label>Date:</label>
-            <li>${isCurrentConditions ? date.toUTCString().replace(regexExp, "") : requestResponse['datetime']}</li>
+            <li>${date.toUTCString().replace(regexExp, "")}</li>
         </div>
-        ${isCurrentConditions ? `
-            <div>
-                <label>Hour:</label>
-                <li>${date.toLocaleTimeString(locale, { timeZone: requestResponse['timezone'] })}</li>
-            </div>
-            ` : ''
-        }
+        <div>
+            <label>Hour:</label>
+            <li>${date.toLocaleTimeString(locale, { timeZone: requestResponse['timezone'] })}</li>
+        </div>
         <div>
             <label>Location:</label>
-            <li>${requestResponse['name']}</li>
+            <li>${apiResponseFieldValidation(fullObject['resolvedAddress']) ? '-' : fullObject['resolvedAddress']}</li>
         </div>
         <div>
             <label>Latitude:</label>
-            <li>${requestResponse['latitude']}</li>
+            <li>${apiResponseFieldValidation(fullObject['latitude']) ? '-' : fullObject['latitude']}</li>
         </div>
         <div>
             <label>Longitude:</label>
-            <li>${requestResponse['longitude']}</li>
+            <li>${apiResponseFieldValidation(fullObject['longitude']) ? '-' : fullObject['longitude']}</li>
         </div>
     `;
 
@@ -180,15 +70,15 @@ function windDataGenerator(requestResponse, htmlElement, dataUnit) {
     let dataElement = `
         <div>
             <label>Wind speed:</label>
-            <li>${requestResponse['windspeed']} ${dataUnit === 'us' ? 'mph' : 'kph'}</li>
+            <li>${apiResponseFieldValidation(requestResponse['windspeed']) ? '-' : requestResponse['windspeed']} ${dataUnit === 'us' ? 'mph' : 'kph'}</li>
         </div>
         <div>
             <label>Wind direction:</label>
-            <li>${requestResponse['winddir']}° ${windDirectionDesc(requestResponse['winddir'])}</li>
+            <li>${apiResponseFieldValidation(requestResponse['winddir']) ? '-' : requestResponse['winddir']}° ${windDirectionDesc(requestResponse['winddir'])}</li>
         </div>
         <div>
             <label>Wind gust:</label>
-            <li>${requestResponse['windgust']} ${dataUnit === 'us' ? 'mph' : 'kph'}</li>
+            <li>${apiResponseFieldValidation(requestResponse['windgust']) ? '-' : requestResponse['windgust']} ${dataUnit === 'us' ? 'mph' : 'kph'}</li>
         </div>
     `;
 
@@ -217,6 +107,11 @@ async function getDataConfiguration() {
     } catch (error) {
         throw new Error(error)
     }
+}
+
+async function getMockData() {
+    const fetchReponse = await fetch('../mockdata.json');
+    return await fetchReponse.json();
 }
 
 function windDirectionDesc(dir) {
@@ -254,16 +149,44 @@ function windDirectionDesc(dir) {
     }
 }
 
-async function displayDataGenerator() {
-    const resultObject = await getDataConfiguration();
-    dataGenerator(resultObject['solarData'], solarDataMook, solarDataBody, "metric");
-    dataGenerator(resultObject['moonPhase'], moonPhaseDataMook, moonPhaseDataBody, "metric");
-    dataGenerator(resultObject['rainSnowData'], rainSnowDataMook, rainSnowDataBody, "metric");
-    dataGenerator(resultObject['environmentalData'], environmentalDataMook, environmentalDataBody, "metric");
-    dataGenerator(resultObject['sourceDara'], sourceDataMook, sourceDataBody, "metric");
-    stationsDataGenerator(stationsMockData, stationsDataBody)
-    generalDataGenerator(generalDataMook, generalDataBody, "metric", true, "pt-br");
-    windDataGenerator(windDataMook, windDataBody, "metric");
+function preProcessingData(responseObject, isCurrentConditions) {
+    if (isCurrentConditions) {
+        return responseObject['currentConditions'];
+    } else {
+        return responseObject['days'][0];
+    }
 }
 
-displayDataGenerator();
+function apiResponseFieldValidation(field) {
+    if (field === null || field === 0 || field === undefined) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function descriptionFieldpreProcessingData(isCurrentConditions, requestResponse, fullObject) {
+    if(isCurrentConditions) {
+        return fullObject['description'];
+    } else {
+        return requestResponse['description'];
+    }
+}
+
+async function displayDataGenerator(isCurrentConditions, dataUnit, locale) {
+    const dataConfiguration = await getDataConfiguration();
+    const apiResponse = await getMockData();
+
+    const responseObject = preProcessingData(apiResponse, isCurrentConditions);
+
+    dataGenerator(dataConfiguration['solarData'], responseObject, solarDataBody, dataUnit);
+    dataGenerator(dataConfiguration['moonPhase'], responseObject, moonPhaseDataBody, dataUnit);
+    dataGenerator(dataConfiguration['rainSnowData'], responseObject, rainSnowDataBody, dataUnit);
+    dataGenerator(dataConfiguration['environmentalData'], responseObject, environmentalDataBody, dataUnit);
+    dataGenerator(dataConfiguration['sourceDara'], responseObject, sourceDataBody, dataUnit);
+    stationsDataGenerator(apiResponse['stations'], stationsDataBody)
+    generalDataGenerator(responseObject, apiResponse, generalDataBody, dataUnit, locale, isCurrentConditions);
+    windDataGenerator(responseObject, windDataBody, dataUnit);
+}
+
+displayDataGenerator(false, "metric", "pt-br");

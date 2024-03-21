@@ -58,34 +58,40 @@
             </div>
 
             <div class="right-side-data-container">
-                <div
-                    class="environmental-data weather-data-container weather-data-container-border default-container">
-                    <label>ENVIRONMENTAL DATA:</label>
-                    <ul data-environmental-data-body></ul>
-                </div>
+                <div class="env-and-source-data-container">
+                    <div
+                        class="environmental-data weather-data-container weather-data-container-border default-container">
+                        <label>ENVIRONMENTAL DATA:</label>
+                        <ul data-environmental-data-body></ul>
+                    </div>
 
+                    <div
+                        class="source-data weather-data-container source-data-container-border default-container">
+                        <label>SOURCE DATA:</label>
+                        <ul data-source-data-body></ul>
+                    </div>
+                </div>
                 <div
-                    class="source-data weather-data-container source-data-container-border default-container">
-                    <label>SOURCE DATA:</label>
-                    <ul data-source-data-body></ul>
+                    class="graph-data">
+                    
                 </div>
             </div>
 
-            </section>
+        </section>
 
-            <section class="input-data-container">
-                <div class="terminal title terminal-border default-container">
-                    <label>Terminal</label>
-                    <div class="terminal-container">
-                        <div class="log-container" data-log-container></div>
-                        <div id="input-terminal" class="input-terminal">
-                            <span>USER-0858> </span>
-                            <textarea class="textarea-terminal" maxlength="615"
-                                data-text-area-terminal></textarea>
-                        </div>
+        <section class="input-data-container">
+            <div class="terminal title terminal-border default-container">
+                <label>Terminal</label>
+                <div class="terminal-container">
+                    <div class="log-container" data-log-container></div>
+                    <div id="input-terminal" class="input-terminal">
+                        <span>USER-0858> </span>
+                        <textarea class="textarea-terminal" maxlength="615"
+                            data-text-area-terminal></textarea>
                     </div>
                 </div>
-                <div class="stations-data title stations-border default-container">
+            </div>
+            <div class="stations-data title stations-border default-container">
                 <label>STATIONS DATA:</label>
                 <table>
                     <thead>
@@ -98,7 +104,8 @@
                     <tbody data-stations-data-body></tbody>
                 </table>
             </div>
-            </section>
-        </body>
-        <script type="module" src="./script.js"></script>
-    </html>
+        </section>
+    </body>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="module" src="./script.js"></script>
+</html>
