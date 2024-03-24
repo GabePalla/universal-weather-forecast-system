@@ -83,6 +83,14 @@
     text-align: left;
 }
 
+.stations-data table thead th {
+    font-size: 2vh;
+}
+
+.stations-data table thead td {
+    font-size: 2vh;
+}
+
 .stations-data table hr {
     width: 100%;
 }

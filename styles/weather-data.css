@@ -5,10 +5,10 @@
 }
 
 .right-side-data-container {
-    display: flex;
-    flex-direction: column;
     width: 40%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .image-solar-moon-data-container {
@@ -28,11 +28,12 @@
 
 .graph-data {
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .weather-data-container {
     padding: .1vw 0px .5vw 1vw;
-    /* font-size: 1.9vh; */
     flex: 1 1 content;
 }
 
@@ -44,9 +45,11 @@
     border-width: 0px 1px 0px 0px;
 }
 
+/* ATENÇÃO */
 .env-and-source-data-container {
     display: flex;
 }
+/* ATENÇÃO */
 
 .rain-snow-data-container-border {
     border-width: 0px 1px 0px 0px;
@@ -60,6 +63,8 @@
     margin: 0px;
     font-size: large;
 }
+
+
 
 .weather-data-container ul {
     display: flex;
@@ -78,4 +83,35 @@
     width: 50%;
     text-align: left;
 }
+
+.graph-one {
+    width: 100%;
+    height: 50%;
+}
+
+.graph-svg {
+    width: 100%;
+    border: 1px solid #2AFB97;
+}
+
+.time-svg {
+    width: 100%;
+    height: 15px;
+}
+
+svg rect {
+    fill: #2AFB97;
+}
+
+.txt {
+    fill: #2AFB97;
+    font-size: 1.7vh;
+    transform-origin: 0px 50%;
+}
+
+.txt-time {
+    font-size: medium;
+    fill: #2AFB97;
+}
+
 

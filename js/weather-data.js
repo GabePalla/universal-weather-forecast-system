@@ -7,6 +7,8 @@ const environmentalDataBody = document.querySelector('[data-environmental-data-b
 const sourceDataBody = document.querySelector('[data-source-data-body]');
 const stationsDataBody = document.querySelector('[data-stations-data-body]');
 
+const viewPortHeight = window.innerHeight;
+
 function dataGenerator(labelAndKeysList, requestResponse, htmlElement, dataUnit) {
     labelAndKeysList.forEach(element => {
         let dataElement = `
@@ -100,6 +102,57 @@ function stationsDataGenerator(requestResponse, htmlElement) {
     })
 }
 
+function graphGenerator(requestResponse) {
+    const valueList = requestResponse['hours'];
+    const labelList = ["03:00:00", "06:00:00", "09:00:00", "12:00:00", "15:00:00", "18:00:00", "21:00:00"];
+
+    const dimensions = {
+        width: 758.8,
+        height: 152
+      };
+      
+      let scale_x = d3.scaleBand()
+        .domain(valueList.map(resp => resp.datetime))
+        .range([1, dimensions.width]);
+      
+      let scale_y = d3.scaleLinear()
+        .domain([0, 100])
+        .range([0, dimensions.height - 20]);
+      
+      let svg = d3.select(".graph-svg");
+      let svgTime = d3.select(".time-svg");
+      
+      svg
+        .selectAll("rect")
+        .data(valueList)
+        .join("rect")
+        .attr("x", (d) => scale_x(d.datetime))
+        .attr("y", (d) => dimensions.height - scale_y(d.precipprob))
+        .attr("width", scale_x.bandwidth() - 1)
+        .attr("height", (d) => scale_y(d.precipprob));
+      
+      svg.selectAll("txt")
+        .data(valueList)
+        .join("text")
+        .text(function (d) {
+          return `${d.precipprob.toFixed(0)}%`
+        })
+        .attr("class", "txt")
+        .attr("x", (d) => scale_x(d.datetime))
+        .attr("y", (d) => dimensions.height - scale_y(d.precipprob) - 2);
+      
+      svgTime
+        .selectAll("txt-time")
+        .data(labelList)
+        .join("text")
+        .text(function (d) {
+          return d
+        })
+        .attr("class", "txt-time")
+        .attr("x", (d) => scale_x(d))
+        .attr("y", 10);
+}
+
 async function getDataConfiguration() {
     try {
         const fetchReponse = await fetch('../conf/weather-data-config.json');
@@ -187,6 +240,7 @@ async function displayDataGenerator(isCurrentConditions, dataUnit, locale) {
     stationsDataGenerator(apiResponse['stations'], stationsDataBody)
     generalDataGenerator(responseObject, apiResponse, generalDataBody, dataUnit, locale, isCurrentConditions);
     windDataGenerator(responseObject, windDataBody, dataUnit);
+    graphGenerator(responseObject);
 }
 
 displayDataGenerator(false, "metric", "pt-br");

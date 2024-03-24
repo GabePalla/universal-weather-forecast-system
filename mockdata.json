@@ -61,7 +61,7 @@
           "humidity": 92.31,
           "dew": 46.0,
           "precip": 0.004,
-          "precipprob": 100.0,
+          "precipprob": 50.0,
           "snow": 0.0,
           "snowdepth": 0.0,
           "preciptype": [
