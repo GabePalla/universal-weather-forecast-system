@@ -102,55 +102,139 @@ function stationsDataGenerator(requestResponse, htmlElement) {
     })
 }
 
-function graphGenerator(requestResponse) {
-    const valueList = requestResponse['hours'];
+function barChartGenerator(width, height, color, valueList) {
     const labelList = ["03:00:00", "06:00:00", "09:00:00", "12:00:00", "15:00:00", "18:00:00", "21:00:00"];
+    const configuration = {
+        width: width,
+        height: height,
+        baseHeight: height * 0.875,
+        domain_y: {
+            min: 0,
+            max: 100
+        },
+        domain_x: {
+            min: null,
+            max: null
+        },
+        range_y: {
+            min: 0,
+            max: height - (height * 0.2)
+        },
+        range_x: {
+            min: 1,
+            max: width
+        },
+        font_size: height * 0.055
+    };
 
-    const dimensions = {
-        width: 758.8,
-        height: 152
-      };
-      
-      let scale_x = d3.scaleBand()
+    let scale_x = d3.scaleBand()
         .domain(valueList.map(resp => resp.datetime))
-        .range([1, dimensions.width]);
-      
-      let scale_y = d3.scaleLinear()
-        .domain([0, 100])
-        .range([0, dimensions.height - 20]);
-      
-      let svg = d3.select(".graph-svg");
-      let svgTime = d3.select(".time-svg");
-      
-      svg
-        .selectAll("rect")
+        .range([configuration.range_x.min, configuration.range_x.max]);
+
+    let scale_y = d3.scaleLinear()
+        .domain([configuration.domain_y.min, configuration.domain_y.max])
+        .range([configuration.range_y.min, configuration.range_y.max]);
+
+    let container = d3.select(".graph-one");
+
+    container
+        .append("svg")
+        .attr("class", "graph-svg");
+
+    let svg = d3.select(".graph-svg");
+
+    svg
+        .attr("width", configuration.width)
+        .attr("height", configuration.height);
+
+    svg
+        .append("line")
+        .attr("x1", 0)
+        .attr("y1", 0)
+        .attr("x2", configuration.width)
+        .attr("y2", 0)
+        .attr("stroke", color)
+        .attr("stroke-width", 2);
+
+    // svg
+    //     .append("line")
+    //     .attr("x1", 0)
+    //     .attr("y1", 0)
+    //     .attr("x2", 0)
+    //     .attr("y2", scale_y(configuration.domain_y.max) + (configuration.baseHeight - scale_y(configuration.domain_y.max)))
+    //     .attr("stroke", color)
+    //     .attr("stroke-width", 2);
+
+    // svg
+    //     .append("line")
+    //     .attr("x1", configuration.width)
+    //     .attr("y1", 0)
+    //     .attr("x2", configuration.width)
+    //     .attr("y2", scale_y(configuration.domain_y.max) + (configuration.baseHeight - scale_y(configuration.domain_y.max)))
+    //     .attr("stroke", color)
+    //     .attr("stroke-width", 2);
+
+    svg
+        .append("line")
+        .attr("x1", 0)
+        .attr("y1", scale_y(configuration.domain_y.max) + (configuration.baseHeight - scale_y(configuration.domain_y.max)))
+        .attr("x2", configuration.width)
+        .attr("y2", scale_y(configuration.domain_y.max) + (configuration.baseHeight - scale_y(configuration.domain_y.max)))
+        .attr("stroke", color)
+        .attr("stroke-width", 2);
+
+    svg
+        .append("g")
+        .attr("class", "graph-container");
+
+    let graphContainer = d3.select(".graph-container");
+
+    graphContainer
+        .selectAll(".graph-bar-container")
         .data(valueList)
-        .join("rect")
+        .join("g")
+        .attr("class", "graph-bar-container")
+        .append("rect")
+        .attr("fill", color)
         .attr("x", (d) => scale_x(d.datetime))
-        .attr("y", (d) => dimensions.height - scale_y(d.precipprob))
+        .attr("y", (d) => (configuration.baseHeight) - scale_y(d.precipprob))
         .attr("width", scale_x.bandwidth() - 1)
         .attr("height", (d) => scale_y(d.precipprob));
-      
-      svg.selectAll("txt")
+
+    let graphBarContainer = d3.selectAll(".graph-bar-container");
+
+    graphBarContainer
         .data(valueList)
-        .join("text")
+        .append("text")
         .text(function (d) {
-          return `${d.precipprob.toFixed(0)}%`
+            return `${(d.precipprob).toFixed(0)}%`
         })
         .attr("class", "txt")
-        .attr("x", (d) => scale_x(d.datetime))
-        .attr("y", (d) => dimensions.height - scale_y(d.precipprob) - 2);
-      
-      svgTime
+        .attr("fill", color)
+        .attr("font-size", configuration.font_size)
+        .attr('text-anchor', 'middle')
+        .attr("x", (d) => scale_x(d.datetime) + (scale_x.bandwidth() / 2))
+        .attr("y", (d) => (configuration.baseHeight - 2) - scale_y(d.precipprob));
+
+    svg
+        .append("g")
+        .attr("class", "graph-time-container");
+
+    let graphTimeContainer = d3.select(".graph-time-container");
+
+    graphTimeContainer
         .selectAll("txt-time")
         .data(labelList)
         .join("text")
         .text(function (d) {
-          return d
+            return d
         })
         .attr("class", "txt-time")
-        .attr("x", (d) => scale_x(d))
-        .attr("y", 10);
+        .attr("fill", color)
+        .attr("font-size", configuration.font_size)
+        .attr('text-anchor', 'middle')
+        .attr("x", (d) => scale_x(d) + (scale_x.bandwidth() / 2))
+        .attr("y", configuration.baseHeight + configuration.font_size);
 }
 
 async function getDataConfiguration() {
@@ -219,7 +303,7 @@ function apiResponseFieldValidation(field) {
 }
 
 function descriptionFieldpreProcessingData(isCurrentConditions, requestResponse, fullObject) {
-    if(isCurrentConditions) {
+    if (isCurrentConditions) {
         return fullObject['description'];
     } else {
         return requestResponse['description'];
@@ -240,7 +324,7 @@ async function displayDataGenerator(isCurrentConditions, dataUnit, locale) {
     stationsDataGenerator(apiResponse['stations'], stationsDataBody)
     generalDataGenerator(responseObject, apiResponse, generalDataBody, dataUnit, locale, isCurrentConditions);
     windDataGenerator(responseObject, windDataBody, dataUnit);
-    graphGenerator(responseObject);
+    barChartGenerator(758, 206, "#2AFB97", responseObject['hours'])
 }
 
 displayDataGenerator(false, "metric", "pt-br");
